@@ -76,7 +76,7 @@ sudo mv "/usr/share/icons/Oxylite/actions/start-here.svg" "/usr/share/icons/Oxyl
 # Mint-X Icons by the Linux Mint team
 # https://github.com/linuxmint/mint-x-icons
 ## random number for temp file name
-RANDTMP=$( zsh -c "echo $(( RANDOM*13*31*59 ))" )
+RANDTMP=$( zsh -c 'echo "$(( RANDOM*13*31*59 ))"' )
 
 # install, unzip, move to /usr/share/icons
 wget -O "/tmp/mint-x-$RANDTMP.zip" https://github.com/linuxmint/mint-x-icons/archive/refs/heads/master.zip
