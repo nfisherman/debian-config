@@ -90,7 +90,6 @@ rm -rf /tmp/mint-x-*
 sudo cp -r ./icons/dist-icons /usr/share/icons/
 
 # Combine Icon Themes
-mkdir -p ~/.icons/MASTER
 cp -r ./icons/MASTER ~/.icons/MASTER
 
 # Apply Theming
@@ -100,6 +99,7 @@ dconf write /org/mate/marco/general/theme "'Glazy watter'"
 dconf write /org/mate/desktop/peripherals/mouse/cursor-theme "'OSX-ElCapitan'"
 
 echo "Install complete!"
+response='swagmoney72'
 while [ "${response}" != 'y' ] && [ "${response}" != 'n' ] && [ "${response}" != '' ]; do
 	printf "Would you like to restart? [Y/n] " >&2
 	read -r response
