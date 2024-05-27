@@ -58,7 +58,7 @@ curl -Lfs \
 DIR="$(pwd)"
 
 cd /usr/share/themes || { echo "\"/usr/share/themes\" does not exist?"; exit 1; }
-git clone https://git.disroot.org/eudaimon/Skewaita.git
+sudo git clone https://git.disroot.org/eudaimon/Skewaita.git
 cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
 bash use_scheme.sh colorscheme-light-blue
 cd ..
