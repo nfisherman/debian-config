@@ -17,6 +17,7 @@ touch .installed
 sudo apt install -y dconf-cli dconf-editor bash curl coreutils git micro python3 sassc wget zoxide zsh
 
 # Oh My Zsh
+# https://github.com/ohmyzsh/ohmyzsh
 if [ -e "$HOME/.oh-my-zsh" ]; then
 	echo "Oh My Zsh is already installed, skipping."
 else 
