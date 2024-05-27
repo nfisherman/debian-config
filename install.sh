@@ -16,7 +16,7 @@ touch .installed
 DIR="$(pwd)"
 
 # Dependencies
-sudo apt install -y bash curl coreutils git micro python3 sassc wget zoxide zsh
+sudo apt install -y dconf-cli dconf-editor bash curl coreutils git micro python3 sassc wget zoxide zsh
 
 # Oh My Zsh
 cp ./dotfiles/.zshrc ~/.zshrc
@@ -65,6 +65,8 @@ cd "$DIR" || { echo "Fatal error. Install directory does not exist."; exit 1; }
 # https://www.gnome-look.org/p/2055724
 sudo git clone https://github.com/mx-2/oxylite-icon-theme/ /usr/share/icons/Oxylite
 sudo sed -ie "s/Name=Oxylite icons/Name=Oxylite/" /usr/share/icons/Oxylite/index.theme
+## disable the start menu icon bc it's ugly
+sudo mv "/usr/share/icons/Oxylite/actions/start-here.svg" "/usr/share/icons/Oxylite/actions/start-here.svg.disabled"
 
 # Mint-X Icons by the Linux Mint team
 # https://github.com/linuxmint/mint-x-icons
@@ -79,6 +81,15 @@ sudo mv -v /tmp/mint-x-icons-master/usr/share/icons/* /usr/share/icons/
 ## cleanup
 rm -rf /tmp/mint-x-*
 
-# combine icon themes
+# Add Debian Start Icons
+sudo cp ./icons/dist-icons /usr/share/icons/
+
+# Combine Icon Themes
 mkdir -p ~/.icons/MASTER
 cp ./icons/index.theme ~/.icons/MASTER
+
+# Apply Theming
+dconf write /org/mate/desktop/interface/icon-theme "'MASTER'"
+dconf write /org/mate/desktop/interface/gtk-theme "'Skewaita'"
+dconf write /org/mate/marco/general/theme "'Glazy watter'"
+dconf write /org/mate/desktop/peripherals/mouse/cursor-theme "'OSX-ElCapitan'"
