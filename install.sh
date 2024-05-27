@@ -52,7 +52,7 @@ curl -Lfs \
 # https://www.gnome-look.org/p/1768839
 DIR="$(pwd)"
 
-cd ~/.themes || { echo "\"~/.themes\" does not exist?"; exit 1; }
+cd /usr/share/themes || { echo "\"/usr/share/themes\" does not exist?"; exit 1; }
 git clone https://git.disroot.org/eudaimon/Skewaita.git
 cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
 bash use_scheme.sh colorscheme-light-blue
@@ -86,7 +86,7 @@ sudo cp ./icons/dist-icons /usr/share/icons/
 
 # Combine Icon Themes
 mkdir -p ~/.icons/MASTER
-cp ./icons/index.theme ~/.icons/MASTER
+cp ./icons/MASTER ~/.icons/MASTER
 
 # Apply Theming
 dconf write /org/mate/desktop/interface/icon-theme "'MASTER'"
@@ -101,6 +101,6 @@ while [ "${response}" != 'y' ] && [ "${response}" != 'n' ]; do
 	response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
 done
 
-if [ "${response}" = 'y' ]; then
+if [ "${response}" = 'y' ] || [ "${response}" = '' ]; then
 	reboot
 fi
