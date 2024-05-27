@@ -9,9 +9,11 @@ if ! command -v curl > /dev/null; then
 fi
 
 curl -s https://api.github.com/repos/nfisherman/debian-config/releases/latest | \
-    grep "nfisherman-debian-config-*.sh" | \
+    grep "nfisherman-debian-config-*" | \
     cut -d : -f 2,3 | \
     tr -d \" | \
     wget -qi - 
 
+sha256sum --check nfisherman-debian-config-*.sh.DIGESTS || \
+    { echo "Download failed. Try again."; rm nfisherman-debian-config-*; exit 1; }
 sh nfisherman-debian-config-*.sh "$1"
