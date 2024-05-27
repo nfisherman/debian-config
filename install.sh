@@ -25,7 +25,7 @@ wget -O- "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install
 
 # OSX El Capitan Cursors by XXMMTRTXX
 # https://www.mate-look.org/p/1084939
-sudo mkdir -p /usr/share/icons/OSX-ElCapitan
+sudo mkdir -p /usr/share/icons/OSX-ElCapitan || { echo "Fatal error. Root does not have root permissions?"; exit 1; }
 
 ## https://unix.stackexchange.com/a/743991
 ## this took me forever
@@ -42,7 +42,7 @@ curl -Lfs "https://www.mate-look.org/p/1084939/loadFiles" | \
 
 # Glazy Metacity Theme by NOVOMENTE
 # https://www.mate-look.org/s/Mate/p/1007198
-mkdir -p ~/.themes
+mkdir -p ~/.themes || { echo "Fatal error. No permissions for your own home folder?"; exit 1; }
 
 ## download theme pack
 curl -Lfs \
@@ -60,3 +60,20 @@ cd ..
 sh compile.sh light
 
 cd "$DIR" || { echo "Fatal error. Install directory does not exist."; exit 1; }
+
+# Oxylite Icon Theme by MX-2
+# https://www.gnome-look.org/p/2055724
+sudo git clone https://github.com/mx-2/oxylite-icon-theme/ /usr/share/icons/Oxylite
+
+# Mint-X Icons by the Linux Mint team
+# https://github.com/linuxmint/mint-x-icons
+## random number for temp file name
+RANDTMP=$( zsh -c "echo $(( RANDOM*13*31*59 ))" )
+
+# install, unzip, move to /usr/share/icons
+wget -O "/tmp/mint-x-$RANDTMP.zip" https://github.com/linuxmint/mint-x-icons/archive/refs/heads/master.zip
+unzip -qq "/tmp/mint-x-$RANDTMP.zip" "mint-x-icons-master/usr/share/icons/*" -d "/tmp/"
+sudo mv -v /tmp/mint-x-icons-master/usr/share/icons/* /usr/share/icons/
+
+## cleanup
+rm -rf /tmp/mint-x-*
