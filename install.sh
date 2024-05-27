@@ -13,8 +13,10 @@ if [ "${1}" != '--force-install' ] && [ -f ".installed" ]; then
 fi
 touch .installed
 
+DIR="$(pwd)"
+
 # Dependencies
-sudo apt install -y curl coreutils micro python3 wget zoxide zsh
+sudo apt install -y curl coreutils git micro python3 sassc wget zoxide zsh
 
 # Oh My Zsh
 cp ./dotfiles/.zshrc ~/.zshrc
@@ -42,8 +44,19 @@ curl -Lfs "https://www.mate-look.org/p/1084939/loadFiles" | \
 # https://www.mate-look.org/s/Mate/p/1007198
 mkdir -p ~/.themes
 
-# download theme pack
+## download theme pack
 curl -Lfs \
 	"https://sourceforge.net/projects/novomente-themes/files/Metacity/Glazy_pack.tar.gz/download" | \
-	# extract pack, extract each individual theme
+	### extract pack, extract each individual theme
 	tar --to-command='tar -xzf - -C ~/.themes' -xzf - --exclude="README*" --strip-components=1
+
+# Skewaita GTK Theme by NESTORT
+# https://www.gnome-look.org/p/1768839
+cd ~/.themes || { echo "\"~/.themes\" does not exist?"; exit 1; }
+git clone https://git.disroot.org/eudaimon/Skewaita.git
+cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
+sh compile.sh colorscheme-light-blue.sh
+cd ..
+sh compile.sh light
+
+cd "$DIR" || { echo "Fatal error. Install directory does not exist."; exit 1; }
