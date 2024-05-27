@@ -30,4 +30,6 @@ sudo rm -rf /usr/share/Skewaita
 rm -rf ~/.icons/MASTER
 rm -rf ~/.themes/Glazy*
 
+rm -f .installed
+
 echo "Themes have been uninstalled."
