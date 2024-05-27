@@ -13,8 +13,6 @@ if [ "${1}" != '--force-install' ] && [ -f ".installed" ]; then
 fi
 touch .installed
 
-DIR="$(pwd)"
-
 # Dependencies
 sudo apt install -y dconf-cli dconf-editor bash curl coreutils git micro python3 sassc wget zoxide zsh
 
@@ -52,6 +50,8 @@ curl -Lfs \
 
 # Skewaita GTK Theme by NESTORT
 # https://www.gnome-look.org/p/1768839
+DIR="$(pwd)"
+
 cd ~/.themes || { echo "\"~/.themes\" does not exist?"; exit 1; }
 git clone https://git.disroot.org/eudaimon/Skewaita.git
 cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
@@ -93,3 +93,14 @@ dconf write /org/mate/desktop/interface/icon-theme "'MASTER'"
 dconf write /org/mate/desktop/interface/gtk-theme "'Skewaita'"
 dconf write /org/mate/marco/general/theme "'Glazy watter'"
 dconf write /org/mate/desktop/peripherals/mouse/cursor-theme "'OSX-ElCapitan'"
+
+echo "Install complete!"
+while [ "${response}" != 'y' ] && [ "${response}" != 'n' ]; do
+	printf "Would you like to restart? [Y/n] " >&2
+	read -r response
+	response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
+done
+
+if [ "${response}" = 'y' ]; then
+	reboot
+fi
