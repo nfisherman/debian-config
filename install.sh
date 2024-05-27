@@ -60,9 +60,9 @@ DIR="$(pwd)"
 cd /usr/share/themes || { echo "\"/usr/share/themes\" does not exist?"; exit 1; }
 sudo git clone https://git.disroot.org/eudaimon/Skewaita.git
 cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
-bash use_scheme.sh colorscheme-light-blue
+sudo bash use_scheme.sh colorscheme-light-blue
 cd ..
-bash compile.sh light
+sudo bash compile.sh light
 
 cd "$DIR" || { echo "Fatal error. Install directory does not exist."; exit 1; }
 
@@ -87,11 +87,11 @@ sudo mv -v /tmp/mint-x-icons-master/usr/share/icons/* /usr/share/icons/
 rm -rf /tmp/mint-x-*
 
 # Add Debian Start Icons
-sudo cp ./icons/dist-icons /usr/share/icons/
+sudo cp -r ./icons/dist-icons /usr/share/icons/
 
 # Combine Icon Themes
 mkdir -p ~/.icons/MASTER
-cp ./icons/MASTER ~/.icons/MASTER
+cp -r ./icons/MASTER ~/.icons/MASTER
 
 # Apply Theming
 dconf write /org/mate/desktop/interface/icon-theme "'MASTER'"
@@ -107,5 +107,5 @@ while [ "${response}" != 'y' ] && [ "${response}" != 'n' ] && [ "${response}" !=
 done
 
 if [ "${response}" = 'y' ] || [ "${response}" = '' ]; then
-	reboot
+	systemctl reboot
 fi
