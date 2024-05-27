@@ -2,7 +2,7 @@
 
 # Root check
 if [ "$(id -u)" -eq 0 ]; then
-	echo "Cannot be run as root. Run as a normal user with sudo priveleges."
+	echo "Cannot be run as root. Run as a normal user with sudo privileges."
 	exit
 fi
 
