@@ -1,15 +1,17 @@
 # debian-config
 my debian stuff
 
-## Prerequisites
-``git``
+## Dependencies
+``curl git wget``
 
 ## Installing
 ```sh
-wget -O- https://github.com/nfisherman/debian-config/releases/latest | unzip -
-cd debian-config
-sh install.sh
+sh -c "$(wget -O- https://raw.githubusercontent.com/nfisherman/debian-config/main/tools/pull-latest.sh)"
+
+# append "--no-install" to pull script without automatic installatin
+sh -c "$(wget -O- https://raw.githubusercontent.com/nfisherman/debian-config/main/tools/pull-latest.sh) --no-install"
 ```
+
 
 ## Uninstalling
 ```sh
