@@ -17,9 +17,11 @@ touch .installed
 sudo apt install -y dconf-cli dconf-editor bash curl coreutils git micro python3 sassc wget zoxide zsh
 
 # Oh My Zsh
-cp ./dotfiles/.zshrc ~/.zshrc
-wget -O- "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | \
-	KEEP_ZSHRC=yes sh
+if [ ! -e "$HOME/.oh-my-zsh" ]; then
+	cp ./dotfiles/.zshrc ~/.zshrc
+	wget -O- "https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh" | \
+		KEEP_ZSHRC=yes sh
+fi
 
 # OSX El Capitan Cursors by XXMMTRTXX
 # https://www.mate-look.org/p/1084939
@@ -95,7 +97,7 @@ dconf write /org/mate/marco/general/theme "'Glazy watter'"
 dconf write /org/mate/desktop/peripherals/mouse/cursor-theme "'OSX-ElCapitan'"
 
 echo "Install complete!"
-while [ "${response}" != 'y' ] && [ "${response}" != 'n' ]; do
+while [ "${response}" != 'y' ] && [ "${response}" != 'n' ] && [ "${response}" != '' ]; do
 	printf "Would you like to restart? [Y/n] " >&2
 	read -r response
 	response=$(echo "$response" | tr '[:upper:]' '[:lower:]')
