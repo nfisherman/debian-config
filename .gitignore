@@ -1,2 +1,5 @@
 # Flag that states whether the script was already installed
 .installed
+
+# Download scripts
+release/
