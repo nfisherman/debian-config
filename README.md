@@ -6,7 +6,7 @@ my debian stuff
 
 ## Installing
 ```sh
-git clone https://github.com/nfisherman/debian-config.git
+wget -O- https://github.com/nfisherman/debian-config/releases/latest | unzip -
 cd debian-config
 sh install.sh
 ```
