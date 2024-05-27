@@ -16,7 +16,7 @@ touch .installed
 DIR="$(pwd)"
 
 # Dependencies
-sudo apt install -y curl coreutils git micro python3 sassc wget zoxide zsh
+sudo apt install -y bash curl coreutils git micro python3 sassc wget zoxide zsh
 
 # Oh My Zsh
 cp ./dotfiles/.zshrc ~/.zshrc
@@ -55,15 +55,16 @@ curl -Lfs \
 cd ~/.themes || { echo "\"~/.themes\" does not exist?"; exit 1; }
 git clone https://git.disroot.org/eudaimon/Skewaita.git
 cd Skewaita/source/templates || { echo "clone failed"; exit 1; }
-sh compile.sh colorscheme-light-blue.sh
+bash use_scheme.sh colorscheme-light-blue
 cd ..
-sh compile.sh light
+bash compile.sh light
 
 cd "$DIR" || { echo "Fatal error. Install directory does not exist."; exit 1; }
 
 # Oxylite Icon Theme by MX-2
 # https://www.gnome-look.org/p/2055724
 sudo git clone https://github.com/mx-2/oxylite-icon-theme/ /usr/share/icons/Oxylite
+sudo sed -ie "s/Name=Oxylite icons/Name=Oxylite/" /usr/share/icons/Oxylite/index.theme
 
 # Mint-X Icons by the Linux Mint team
 # https://github.com/linuxmint/mint-x-icons
@@ -77,3 +78,7 @@ sudo mv -v /tmp/mint-x-icons-master/usr/share/icons/* /usr/share/icons/
 
 ## cleanup
 rm -rf /tmp/mint-x-*
+
+# combine icon themes
+mkdir -p ~/.icons/MASTER
+cp ./icons/index.theme ~/.icons/MASTER
