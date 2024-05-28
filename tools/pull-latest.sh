@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# modified from
+# adapted from
 # https://gist.github.com/steinwaywhw/a4cd19cda655b8249d908261a62687f8
 
 if ! command -v curl > /dev/null; then
