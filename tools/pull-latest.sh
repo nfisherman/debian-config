@@ -6,6 +6,9 @@
 if ! command -v curl > /dev/null; then
     echo "Fatal error. \"curl\" not found."
     exit 1
+elif ! command -v wget > /dev/null; then
+    echo "Fatal error. \"wget\" not found."
+    exit 1
 fi
 
 curl -s https://api.github.com/repos/nfisherman/debian-config/releases/latest | \
