@@ -2,4 +2,5 @@
 .installed
 
 # Download scripts
-release/
+release/*
+!release/build.sh
