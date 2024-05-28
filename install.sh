@@ -18,7 +18,7 @@ sudo apt install -y dconf-cli dconf-editor bash curl coreutils git micro python3
 
 # Oh My Zsh
 # https://github.com/ohmyzsh/ohmyzsh
-if [ -e "$HOME/.oh-my-zsh" ]; then
+if [ "${1}" != '--force-install' ] && [ -e "$HOME/.oh-my-zsh" ]; then
 	echo "Oh My Zsh is already installed, skipping."
 else 
 	cp ./dotfiles/.zshrc ~/.zshrc
