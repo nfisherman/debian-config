@@ -1,6 +1,5 @@
 # Flag that states whether the script was already installed
 .installed
 
-# Download scripts
-release/*
-!release/build.sh
+# Build scripts
+release/*.*.*/

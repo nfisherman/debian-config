@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
-if [[  ]]; then
+if [[ $1 == '' ]]; then
     echo
 fi
